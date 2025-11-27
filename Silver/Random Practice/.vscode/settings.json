@@ -24,7 +24,9 @@
         "valarray": "cpp",
         "variant": "cpp",
         "any": "cpp",
-        "system_error": "cpp"
+        "system_error": "cpp",
+        "limits": "cpp",
+        "tuple": "cpp"
     },
     "editor.inlineSuggest.edits.allowCodeShifting": "never",
     "editor.inlineSuggest.edits.renderSideBySide": "never",
