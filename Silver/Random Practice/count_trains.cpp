@@ -1,4 +1,4 @@
-// CF - G. Count the Trains - R1x00
+// CF - G. Count the Trains - R2000
 
 // I read the editorial and im so happy I actually understand the solution.
 // I'm gonna try to redo this problem on tuesday to see if i can redo it
