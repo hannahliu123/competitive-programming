@@ -1,4 +1,4 @@
-// USACO Guide
+// USACO Guide - UNFINISHED
 
 #include <bits/stdc++.h>
 using namespace std;
