@@ -29,6 +29,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int round3(double x) {
+    return (int)(x*1000 + 0.5); // add 0.5 so it rounds up when it needs to
+}
+
 int main() {
     freopen("sabotage.in", "r", stdin);
     freopen("sabotage.out", "w", stdout);
@@ -37,25 +41,29 @@ int main() {
     vector<int> m(N);
     for (auto& i : m) cin >> i;
 
-    vector<float> forward(N,-1);    // forward averages
-    vector<float> backward(N,-1);   // backward averages
-    int sum = 0;
-    for (int i{1}; i < N-1; ++i) {
-        sum += m[i];
-        forward[i] = (float)sum/i;
-    } sum = 0;
-    for (int i{N-2}; i >= 1; --i) {
-        sum += m[i];
-        backward[i] = (float)sum/(N-i-1);
+    // binary search on the answer
+    int S = accumulate(m.begin(), m.end(), 0);
+    double hi = 1e4*N, lo = 1.0;
+    while (round3(hi) != round3(lo)) {
+        // check if it's possible to end with an average less than or equal to mid:
+        // (S-sum(i,j))/(N-K) <= mid    -->     S-mid*N <= sum(i,j)-mid*K
+        // S = sum of all values in m
+        // sum(i,j) = sum of values in extracted subarray
+        // K = number of values in extracted subarray
+        double mid = (hi+lo)/2;
+        // find the maximum sum subarray sum(i,j) using values in m except each value
+        // gets subtracted by mid when calculating the sum. Use Kadane's Algorithm.
+        double mx = m[1]-mid;    // mx is sum(i,j)-mid*K
+        double mxEnd = mx;
+        for (int i{2}; i < N-1; ++i) {
+            double curr = m[i] - mid;
+            mxEnd = max(mxEnd+curr, curr);
+            mx = max(mx, mxEnd);
+        }
+
+        if (S-mid*N <= mx) hi = mid;    // valid (mid works as an answer)
+        else lo = mid;
     }
 
-    double average = (sum+m[0]+m[N-1])/N;
-    sum = m[0]+m[N-1];
-    int nums = 2;
-    for (int i{0}; i < N; ++i) {
-        ;
-    }
-
-    double ans = (double)sum/nums;
-    cout << fixed << setprecision(3) << ans << endl;
+    cout << fixed << setprecision(3) << lo << endl;
 }
