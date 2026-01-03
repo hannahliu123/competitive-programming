@@ -1,5 +1,8 @@
 // A
 
+// could've used bitwise operations to calculate 2^N bc 1<<N = 2^N because bits are
+// represented in the binary system
+
 #include <bits/stdc++.h>
 using namespace std;
 
