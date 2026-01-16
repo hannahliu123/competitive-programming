@@ -1,0 +1,63 @@
+// CF - C. An impassioned circulation of affection - R1600
+
+// Start: 8:45
+// End: 10:15       1 hr 30 mins
+
+// ok so this took way too long. i mean i had the idea since pretty early kinda bc
+// i already knew it was suppoused to be two pointers. the implementation was a real
+// struggle tho. i think next time i wanna track the time where i figure out some kind
+// of implementation idea. I already track start and end. imma track idea: from now on
+// too. i kinda have a sleep headache rn so imma go to bed but imma be sure to upsolve
+// tmr and like even reimplement it cos i have a ton of time tmrrrr~
+
+//
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int N, Q;
+    string s;
+    cin >> N >> s >> Q;
+
+    vector<vector<int>> alp(26, vector<int>{});
+    for (int i{0}; i < N; ++i) {
+        alp[s[i]-'a'].push_back(i);
+    }
+
+    while (Q--) {
+        int m;
+        char c;
+        cin >> m >> c;
+
+        vector<int> a = alp[c-'a'];
+        int l = 0, r = 0, cnt = m;  // cnt is how many changes remaining
+        int ans = m, temp = 1;    // longest chain
+        while (r < a.size()) {
+            int cost = 0;   // cost to proceed to the next value
+            while (r < a.size()-1) {  // increment r
+                cost = a[r+1] - a[r] - 1;
+                if (cnt < cost) break;  // can't connect the gap fully
+                else {
+                    temp += cost; temp++;   // includes the letter
+                    cnt -= cost;
+                    r++;
+                }
+            }
+            
+            if (cnt > 0) {  // apply extras
+                ans = max(ans, min(temp+cnt, N));
+            } else ans = max(ans, temp);
+            if (r == a.size()-1) break;
+
+            while (l < r && cnt < cost) {  // increment l
+                l++;
+                int ret = a[l] - a[l-1] - 1;
+                temp -= ret; temp--;
+                cnt += ret;
+            } if (l==r && cnt<cost) { l++; r++; };
+        }
+
+        cout << ans << endl;
+    }
+}

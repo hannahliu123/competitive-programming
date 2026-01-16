@@ -1,4 +1,4 @@
-// CF - C. Little Girl and Maximum Sum - R??00
+// CF - C. Little Girl and Maximum Sum - R1500
 
 // Start: 8:21
 // End: 8:34        13 mins!!
