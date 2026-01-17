@@ -1,5 +1,9 @@
 // E
 
+// i think i tried to rush to get to implementation too early for this problem 
+// because i noticed that i was running out of time. i should've just focused on
+// getting the idea instead. anyways my idea was based around prefix sums
+
 #include <bits/stdc++.h>
 using namespace std;
 
