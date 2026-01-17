@@ -1,5 +1,18 @@
 // D
 
+// my solution was just to brute force calculate every possible ending value (via
+// recursion). my implementation took a while to figure out because recursion has
+// always ben tricky for me, but im glad i came to this idea after analyzing time
+// constraints (my preparation helped this time yayyayay!!!)
+
+// WOW my solution is pretty much IDENTICAL to the editorial (lowkey like mine MORE
+// than editorial) wowsers! i mean this is a pretty straight-forward problem with
+// dfs and the only thing special was the restriction of edgeCnt. This makes sense
+// though because it's not like i need to return any value. im just editing the global
+// ans vector, and once i reach an edgeCnt of 10, i stop iterating (return). i do 
+// remember though that when i was implementing this i forgot the return part until
+// i used the dubugger. now ik tho :D
+
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -1,5 +1,12 @@
 // C
 
+// you can assume the cups of sake are chosen least optimally, so the K smallest cups
+// contain sake. of course, the person choosing the cups doesn't know this, so with no
+// imformation, it would be most optimal to choose the biggest -> smallest cups. after
+// drinking N-K cups, it is guarenteed that the remaining cups will be sake (if u were
+// unlucky and the N-K cups u drank were all water). this is essentially just a greedy
+// problem
+
 #include <bits/stdc++.h>
 using namespace std;
 
