@@ -1,5 +1,7 @@
 // D
 
+// oh boy so this problem got complicated really quickly...
+
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -1,5 +1,13 @@
 // C
 
+// okay so i really like games problems because there's always like some clicking
+// point of realization when you figure out how to beat the game. at the same time
+// tho, game problems can get really annoying drawing out test cases and stuff so
+// it lowkey kinda depends. for this one, i made a ton of mistakes when doing test
+// cases when in reality it's so simple. alice always wins unless she can't make a 
+// first move! tbh i think the hardest part of this problem was understanding the
+// problem statement lol
+
 #include <bits/stdc++.h>
 using namespace std;
 
