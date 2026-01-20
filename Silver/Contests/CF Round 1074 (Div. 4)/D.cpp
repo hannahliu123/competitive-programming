@@ -1,5 +1,15 @@
 // D
 
+// this is where the contest started to get a bit chaotic. my first solution tle'd
+// because i didn't know setting a vector equal to another vector toop O(N) time 
+// where N is the size of the vector. then, i rush-implemented a solution that 
+// didn't work before i finally figured out a working solution. my working solution
+// was just keeping track of the last time the whole array was reset, but instead of
+// actively resetting the whole array, I just stored the time value. the next time i
+// came across an index that was updated before the most recent reset time, i would
+// reset that value. i also had to make sure i reset the value at the very end in 
+// case i didn't meet a certain index to reset it
+
 #include <bits/stdc++.h>
 using namespace std;
 

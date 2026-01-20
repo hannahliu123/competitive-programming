@@ -1,5 +1,15 @@
 // E
 
+// this problem got very messy too but when i did finally get the solution, it got
+// WA because i used N instead of M somewhere!!! (in the checks after upper_bound).
+// I actually got to this solution pretty quickly imo and it wasn't that hard. i 
+// figured out to convert L/R signals into -1/+1 and then based on the value of the
+// cumulative L/R total, i know how far each robot is. then i precomputed all of the
+// distances at which each robot would die and etc etc 
+
+// yeah so i just tested my first solution which got WA and made me rewrite everything.
+// i got rid of the N vs M error and ... ok it wont let me test it rn ill come back later
+
 #include <bits/stdc++.h>
 using namespace std;
 
