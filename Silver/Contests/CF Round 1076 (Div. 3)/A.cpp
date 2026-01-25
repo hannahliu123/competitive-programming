@@ -16,6 +16,7 @@ int main() {
             sum += x;
         }
 
+        if (S >= sum) {
             S -= sum;
             if (S%X == 0) cout << "YES" << endl;
             else cout << "NO" << endl;
