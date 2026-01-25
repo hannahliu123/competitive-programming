@@ -1,5 +1,18 @@
 // D
 
+// oh ok so instaed of doing binary search you could've just kept a poitner
+// that iterated through b. Instead of sorting the strength from l -> g, we 
+// could've sorted from g -> l, so as we processed the stregnths, it would
+// be decreasing (so x would be decreasing too) and so the number of valid 
+// swords would be increasing (starting as just the strongest sword but then
+// including lower stengthed swords). The number of valid swords would just
+// equal i. Then we could use a pointer approach where we track the last
+// valid index of the level we were able to beat. Because we get more and 
+// more valid swords, we can keep increasing that level index until we no
+// long can, then update the ans to be i*level. We would only visit each
+// level one time and each sword one time so the time complexity is O(2N),
+// which is just O(N)
+
 #include <bits/stdc++.h>
 using namespace std;
 
