@@ -1,6 +1,32 @@
 // USACO 2024 February Contest, Silver
 // Problem 3. Moorbles
 
+// so at first i implemented a competely wrong answer which was a HUUUGGGGE
+// waste of time. it made me have no time to sovle the other problem which was
+// annoying but my attention span was lowkey running out anyways. i hate when
+// problems have such weak sample test cases but its pretty common so i need
+// to be more aware of edge cases.
+
+// okay so the fully solution is tricky because you never know if making some
+// choice in turn t might cause you to lose later on. As a result, you need to
+// know the minimum number of marbles you need left at each turn in order not 
+// to die sometime in the future. The way i implemented this was with prefix 
+// sum arrays and one issue was that you need to ensure that the marble count 
+// doesn't drop to zero before reaching end because prefix sums only tracks 
+// from some turn t to the end. I realized i could use another greedy idea and
+// keep tracking the next minimum value and use that because without any +x,
+// the prefix sums should be decreasing. it worked but i had to sort the array
+// which took MlogM time. this could actually be implemented with suffix arrays
+// to run in M time (technically MK but K is less than 4 so wtv). The problem is
+// that im really really bad at recognizing and using suffix arrays because it
+// isn't very intuitive to me and ive lowkey never practiced it. 
+
+// This suffix idea works with taking the max of 1 or a negative number because
+// say at turn 8 you needed 5 marbles to be alive and at turn 7 you get a minimum
+// of 10 marbles. then that means at turn 6 you need -5 marbles. but of course
+// if you actually ended up with -5 marbles, you'd lose, so you actually need 1
+// marble just to stay alive at that point!!! this would be cleaner to implement
+
 #include <bits/stdc++.h>
 using namespace std;
 
