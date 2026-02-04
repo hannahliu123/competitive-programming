@@ -18,35 +18,73 @@
 
 // ok i figured out tc 2 and 5 were just because if you had N=2 then the start
 // node (0) would be counted as and end node so that was easy but i think i either
-// used too muhc memory or time for th eother ones.
+// used too much memory or time for the other ones. 
+
+// oh ok so i was exceeding memory. because the way i was storing the vector t
+// meant that if say there was a logn line of node 1-2-3-4-5-6 then 6 branched out
+// to say 6 more leaf nodes, each of the modes 1-6 would have a vector of length
+// 6 in t[node]. Now say there are N=10^5 nodes. if N/2 of them each have each 
+// have a vector of N/2 ints, that's around a total of N^2 integers stored (10^10).
+// one int is 4 bytes and so that would result in 40000 MB. the limit for usaco
+// is 256 MB!!
+
+// another issue with this is the way i copied vectors. this means the creation of
+// t also surpassed the time limit. if im copying x elemnts from one vector to 
+// another, it takes O(x) time. so if i copy a total of 10^10 integers, that's
+// gonna go past our time limit!! i should've spent more time thinking about this
+// but i was rushing (again like always ughh) but even without calculating it, u
+// can kinda sense that itll be a stretch so it was very naive of me to still 
+// implement it anyways (hey at least i got the first few test cases :/)
+
+// once i realized the way of storing t was so unreasonable, i should've tried
+// looking for a different way to solve this problem. one thing i did notice is
+// that i had to "backtrack" for each potion i decided to take and update all 
+// the parent nodes to the node that had the potion. this clearly would've taken
+// too long if say we had 10^4 paths and had to backtrack each time. because of 
+// this, i kinda just disregarded this solution, when in reality, we could've
+// processed all of this DURING the dfs. So basically, after you process how 
+// many leaves are below a given node, that is the total number of traversals
+// that involve the current node. So, if there were 3 potions on that node but it
+// only has two traversals, you can add the minimum of those values (2) to the
+// answer because it'll be impossible to reach it a third time!! then when you
+// update the parent node, instead of adding 3 to its leaves, you add 0. This is
+// such a nice and clean solution!
 
 #include <bits/stdc++.h>
 using namespace std;
 
 vector<vector<int>> adj;
 vector<int> leaves;
-vector<vector<int>> t;
-int nxt;
+vector<int> p;
+vector<int> potions;
+int ans;
 
-vector<int> dfs(int node, int prev) {
-    if (node!=0 && adj[node].size()==1) {
-        leaves[node]++;
-        nxt++;
-        t[node].push_back(nxt);
-    }
+void countLeaves(int node, int prev) {
+    if (node!=0 && adj[node].size()==1) leaves[node]++;
     for (auto& i : adj[node]) {
         if (i==prev) continue;
-        vector<int> v2 = dfs(i, node);
-        copy(v2.begin(), v2.end(), back_inserter(t[node]));
+        countLeaves(i, node);
         leaves[node] += leaves[i];
-    } return t[node];
+    }
+}
+
+void dfs(int node, int prev) {
+    if (node!=0 && adj[node].size()==1) leaves[node]++;
+    for (auto& i : adj[node]) {
+        if (i==prev) continue;
+        dfs(i, node);
+        leaves[node] += leaves[i];  // remaining leaves
+    }
+    
+    ans += min(potions[node], leaves[node]);
+    leaves[node] = max(0, leaves[node]-potions[node]);
 }
 
 int main() {
     int N;
     cin >> N;
 
-    vector<int> p(N);
+    p.clear(); p.resize(N);
     for (int i{0}; i < N; ++i) {
         cin >> p[i]; p[i]--;
     }
@@ -59,30 +97,18 @@ int main() {
         adj[b].push_back(a);
     }
 
-    nxt = -1;
-    t.clear(); t.resize(N);
-    dfs(0, -1);
-    int traversals = leaves[0];
-    vector<pair<int,int>> p2(traversals);
+    countLeaves(0, -1);
 
-    for (int i{0}; i < traversals; ++i) {
-        p2[i] = {leaves[p[i]], p[i]};
-    } sort(p2.begin(), p2.end());
-
-    int potions = 0;
-    vector<bool> used(traversals, false);
-    for (int i{0}; i < traversals; ++i) {
-        int node = p2[i].second;
-        for (auto& path : t[node]) {
-            if (!used[path]) {
-                used[path] = true;
-                potions++;
-                break;
-            }
-        }
+    potions.clear(); potions.resize(N, 0);
+    ans = 0;
+    for (int i{0}; i < leaves[0]; ++i) {    // for each traversal
+        potions[p[i]]++;
     }
 
-    cout << potions << endl;
+    leaves.clear(); leaves.resize(N, 0);
+    dfs(0, -1);
+
+    cout << ans << endl;
 }
 
 
