@@ -1,7 +1,7 @@
 // B - Parentheses Balance
 
 // Start: 11:36
-// End: 12:07
+// End: 12:07       31 mins
 
 // super confusing wording so imma just go off guts?
 // bruh okay whoever wrote this question sucks. also the cin problem is so freaking
