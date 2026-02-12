@@ -1,6 +1,15 @@
 // USACO 2026 Second Contest, Silver
 // Problem 2. Declining Invitations
 
+// STOP IM GONNA FREAKING CRASH THE HECK OUT. I COULDVE GOTTEN THIS ENTIRE 
+// SOLUTION IF I ADDED FREAKING ONE LINE OF CODE (loc[rank2] = loc[rank];) 
+// IN THE FIRST IF STATEMENT IN THE updateSelections() FUNCTION BSFR RIGHT 
+// NOW LITERALLY GONNA CRASH THE HECKITY DOO DAH OTUUTUTUTUTUUTU.
+
+// i guess part of the reason i could've catch that logic error was because 
+// my solution was just too complicated (implementation) imma try to read the
+// ediotiral and reimplement it later
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -14,6 +23,7 @@ void updateSelections(vector<int>& loc, vector<pair<int,vector<int>>>& criteria,
         int rank2 = ranks[idx]; // see if rank2 can be selected
         if (loc[rank2] >= 0 && loc[rank2] > loc[rank]) {    // rank2 used somewhere else
             updateSelections(loc, criteria, rank2);
+            loc[rank2] = loc[rank];
             done = true;
         } else if (loc[rank2] == -1) {  // perfect :)
             ans += (long long)rank2+1;
