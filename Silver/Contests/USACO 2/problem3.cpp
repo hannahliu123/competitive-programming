@@ -1,6 +1,17 @@
 // USACO 2026 Second Contest, Silver
 // Problem 3. Farmer John Loves Rotations
 
+// WHOS CRASHING OUT? IM CRASHING OUT!!!! WHOS CRASHING OUT? IM CRASHING OUT!!!!
+// WHOS CRASHING OUT? IM CRASHING OUT!!!! WHOS CRASHING OUT? IMMMMMM CRASHIGNIGINGINGN
+// OUTOUOUTOUTOUTUTOTUOTUOUTOUOUT OMGOMGOGMGMMOGMMGOMOGMGMGOGM BSFR
+
+// okay so once again it was right (I LITERALLY KNEW IT BRO OIESRAOSIDJLGFKDJSLKSDHGL)
+// and i literally just had some minor logic issues which were just my bad implementing.
+// next time i have this i need to look away for a while and work on some other problem.
+// then when i come back i will need to kinda relearn/reunderstand what i did and ill 
+// be able to catch little details better!!! lesson learned bro i couldve gotten sm more
+// points if i was able to catch these little mistakes eisjalejrl kajrl
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -45,8 +56,19 @@ int main() {
 
     for (int i{1}; i < N; ++i) {
         right[i] = min(right[i], right[i-1]+1);
-    } for (int i{N-2}; i >= 0; --i) {
+    } if (right[0] > right[N-1]+1) {
+        right[0] = right[N-1]+1;
+        for (int i{1}; i < N; ++i) {
+            right[i] = min(right[i], right[i-1]+1);
+        }
+    }
+    for (int i{N-2}; i >= 0; --i) {
         left[i] = min(left[i], left[i+1]+1);
+    } if (left[N-1] > left[0]+1) {
+        left[N-1] = left[0]+1;
+        for (int i{N-2}; i >= 0; --i) {
+            left[i] = min(left[i], left[i+1]+1);
+        }
     }
 
     for (int j{0}; j < N; ++j) {    // all favorite indexes
