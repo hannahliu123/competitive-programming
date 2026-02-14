@@ -10,6 +10,14 @@
 // my solution was just too complicated (implementation) imma try to read the
 // ediotiral and reimplement it later
 
+// oh yeah this time complexity is enough because the sum of n_i is guarenteed
+// to be <= 1e6 and we process each one time
+
+// one thing the editorial did differently was use a vector of queues for 
+// my criteria vector<pair<int,vector<int>>>. i used the first int in the
+// pair to track the index/location of the next element, but in reality i couldve
+// just removed it as a whole so i only need to access the first element.
+
 #include <bits/stdc++.h>
 using namespace std;
 
