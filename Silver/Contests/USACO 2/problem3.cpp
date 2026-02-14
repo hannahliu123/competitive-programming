@@ -12,6 +12,11 @@
 // be able to catch little details better!!! lesson learned bro i couldve gotten sm more
 // points if i was able to catch these little mistakes eisjalejrl kajrl
 
+// one way i could speed this up is by using a vector to track frequency instead of a 
+// map. if i needed i could use coodinate compression (not nessecary in this problem tho)
+// and that would actually end up being counterproductive because it would take NlogN to
+// even make the compressed values anyways (maps on top!!)
+
 #include <bits/stdc++.h>
 using namespace std;
 
