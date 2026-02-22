@@ -1,0 +1,16 @@
+Overall Contest Reflection
+
+I wasted too much time on problem one and then my solution for problem two i think
+technically works but doesnt account for the HUGGEGEGGE overflow error sososoosooo
+womp womp. this was a really messy contest imo and i dont think i wouldve been able
+to pass even if i was more locked in and solved the first problem quicker. also I
+didn't look into problem 3 much. im wondering if it would be a graph problem but I
+honestly have no idea.
+
+from here i think imma just go back to griding codeforces and also solving past
+silver problems. less stress ig because now i have like a year. im kinda sad i didn't
+pass this year but its really only my fault because i wasnt locked in over summer or
+even in the winter. i only locked in once the contest season started which was a
+really bad move. i hope i dont do the same thing lol because there's no more pressure
+but i think ill be able to stay consistent (i hope at least). oh well we'll see ig
+and i might try some different habit for keeping practice consistent

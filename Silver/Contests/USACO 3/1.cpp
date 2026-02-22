@@ -1,6 +1,11 @@
 // USACO 2026 Third Contest, Silver
 // Problem 1. Clash!
 
+// this problem just took me WAYYY too long. the implementation itself was so 
+// confusing and then i didnt realize a cost could be repeated. oh well either way
+// my code is so messy and not great at all and i wasted so much time just trying
+// to implement and debug this problem
+
 #include <bits/stdc++.h>
 using namespace std;
 
