@@ -12,31 +12,25 @@ int main() {
         return 0;
     }
 
-    int cnt = 0;
-    string curr = "";
-    vector<string> pals{};
     for (int i{0}; i < s.length(); ++i) {
-        if (s[i]=='!' || s[i]=='.' || s[i]==' ' || s[i]==',' || s[i]=='-' || i==s.length()-1) {
-            bool pal = true;
-            int k = curr.length()-1;
-            for (int j{0}; j < curr.length()/2; ++j) {
-                int a = curr[j], b = curr[k];
-                if (a!=b && (a+32)!=b) {
-                    pal = false;
-                    break;
-                } k--;
-            } 
-            if (pal && curr.length()>1) {
-                cnt++;
-                pals.push_back(curr);
-            } curr = "";
-        } else {
-            curr += s[i];
+        if (s[i] =='!' || s[i]=='.' || s[i]==',' || s[i]=='-') s[i] = ' ';
+    } s += ' ';
+
+    stringstream ss(s);
+    string curr;
+    vector<string> pals{};
+    while (ss >> curr) {
+        string lower = "";
+        for (auto& c : curr) lower += tolower(c);
+        string rev = lower;
+        reverse(rev.begin(), rev.end());
+        if (lower==rev && curr.length()>1) {
+            pals.push_back(curr);
         }
     }
 
-    if (cnt > 0) {
-        cout << cnt;
+    if (pals.size() > 0) {
+        cout << pals.size();
         for (auto& s : pals) {
             cout << "," << s;
         }
