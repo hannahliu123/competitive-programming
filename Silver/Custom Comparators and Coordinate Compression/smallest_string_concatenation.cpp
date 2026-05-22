@@ -1,4 +1,4 @@
-// CF - C. The Smallest String Concatenation - R1x00
+// CF - C. The Smallest String Concatenation - R1700
 
 // Okay at first when i saw this problem i thought it was wayyy too easy bc i 
 // thought the bogus solution of jsut sorting it would work. i quickly realized 
