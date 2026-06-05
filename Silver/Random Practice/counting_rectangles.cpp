@@ -1,4 +1,4 @@
-// CF - E. Counting Rectangles - R1x00
+// CF - E. Counting Rectangles - R1600
 
 // um so i found a working solution of precomputing a prefix sums array for
 // all values of i from 1-1000 except this doesnt pass the memory limit because
