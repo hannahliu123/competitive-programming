@@ -23,7 +23,7 @@ vector<int> a;
 vector<int> b;
 vector<int> idx;
 vector<set<int>> occ;
-vector<pair<bool,bool>> good;
+// vector<pair<bool,bool>> good;
 
 int getFirstOcc(int member) {
     if (occ[member].empty()) return M;
@@ -46,15 +46,15 @@ int main() {
             occ[b[i]].insert(i);
         }
 
-        good.clear(); good.resize(N, {true,true});
+        // good.clear(); good.resize(N, {true,true});
         int problems = 0;
         for (int i=0; i < N-1; i++) {
             int firstOcc = getFirstOcc(a[i]);
             int firstOccRight = getFirstOcc(a[i+1]);
             if (firstOcc > firstOccRight) {
-                good[a[i]].second = false;
-                good[a[i+1]].first = false;
-                problems += 2;
+                // good[a[i]].second = false;
+                // good[a[i+1]].first = false;
+                problems += 1;
             }
         }
 
@@ -67,62 +67,95 @@ int main() {
 
             int prevMember = b[slide];
             int prevIdx = idx[prevMember];
+            int currIdx = idx[member];
+            int firstOcc = getFirstOcc(a[prevIdx]);
+            int currOcc = getFirstOcc(a[currIdx]);
+
             b[slide] = member;
             occ[prevMember].erase(slide);
             occ[member].insert(slide);
-            int currIdx = idx[member];
 
-            // check if the member that got removed creates any problems
-            int firstOcc = getFirstOcc(a[prevIdx]);
             if (prevIdx > 0) {
                 int firstOccLeft = getFirstOcc(a[prevIdx-1]);
-                if (good[a[prevIdx]].first && firstOcc < firstOccLeft) {
-                    good[a[prevIdx]].first = false;
-                    good[a[prevIdx-1]].second = false;
-                    problems += 2;
-                } else if (!good[a[prevIdx]].first && firstOcc > firstOccLeft) {
-                    good[a[prevIdx]].first = true;
-                    good[a[prevIdx-1]].second = true;
-                    problems -= 2;
-                }
+                problems -= firstOcc < firstOccLeft;
             } if (prevIdx < N-1) {
                 int firstOccRight = getFirstOcc(a[prevIdx+1]);
-                if (good[a[prevIdx]].second && firstOcc > firstOccRight) {
-                    good[a[prevIdx]].second = false;
-                    good[a[prevIdx+1]].first = false;
-                    problems += 2;
-                } else if (!good[a[prevIdx]].second && firstOcc < firstOccRight) {
-                    good[a[prevIdx]].second = true;
-                    good[a[prevIdx+1]].first = true;
-                    problems -= 2;
-                } 
-            }
-
-            // check if the member that got added creates any problems
-            int currOcc = getFirstOcc(a[currIdx]);
+                problems -= firstOcc > firstOccRight;
+            } firstOcc = getFirstOcc(a[prevIdx]);
+            if (prevIdx > 0) {
+                int firstOccLeft = getFirstOcc(a[prevIdx-1]);
+                problems += firstOcc < firstOccLeft;
+            } if (prevIdx < N-1) {
+                int firstOccRight = getFirstOcc(a[prevIdx+1]);
+                problems += firstOcc > firstOccRight;
+            } 
+            
             if (currIdx > 0) {
                 int firstOccLeft = getFirstOcc(a[currIdx-1]);
-                if (good[a[currIdx]].first && currOcc < firstOccLeft) {
-                    good[a[currIdx]].first = false;
-                    good[a[currIdx-1]].second = false;
-                    problems += 2;
-                } else if (!good[a[currIdx]].first && currOcc > firstOccLeft) {
-                    good[a[currIdx]].first = true;
-                    good[a[currIdx-1]].second = true;
-                    problems -= 2;
-                }
+                problems -= currOcc < firstOccLeft;
             } if (currIdx < N-1) {
                 int firstOccRight = getFirstOcc(a[currIdx+1]);
-                if (good[a[currIdx]].second && currOcc > firstOccRight) {
-                    good[a[currIdx]].second = false;
-                    good[a[currIdx+1]].first = false;
-                    problems += 2;
-                } else if (!good[a[currIdx]].second && currOcc < firstOccRight) {
-                    good[a[currIdx]].second = true;
-                    good[a[currIdx+1]].first = true;
-                    problems -= 2;
-                } 
+                problems -= currOcc > firstOccRight;
+            } currOcc = getFirstOcc(a[currIdx]);
+            if (currIdx > 0) {
+                int firstOccLeft = getFirstOcc(a[currIdx-1]);
+                problems += currOcc < firstOccLeft;
+            } if (currIdx < N-1) {
+                int firstOccRight = getFirstOcc(a[currIdx+1]);
+                problems += currOcc > firstOccRight;
             }
+
+            // // check if the member that got removed creates any problems
+            // int firstOcc = getFirstOcc(a[prevIdx]);
+            // if (prevIdx > 0) {
+            //     int firstOccLeft = getFirstOcc(a[prevIdx-1]);
+            //     if (good[a[prevIdx]].first && firstOcc < firstOccLeft) {
+            //         // good[a[prevIdx]].first = false;
+            //         // good[a[prevIdx-1]].second = false;
+            //         problems += 1;
+            //     } else if (!good[a[prevIdx]].first && firstOcc > firstOccLeft) {
+            //         // good[a[prevIdx]].first = true;
+            //         // good[a[prevIdx-1]].second = true;
+            //         problems -= 2;
+            //     }
+            // } if (prevIdx < N-1) {
+            //     int firstOccRight = getFirstOcc(a[prevIdx+1]);
+            //     if (good[a[prevIdx]].second && firstOcc > firstOccRight) {
+            //         // good[a[prevIdx]].second = false;
+            //         // good[a[prevIdx+1]].first = false;
+            //         problems += 2;
+            //     } else if (!good[a[prevIdx]].second && firstOcc < firstOccRight) {
+            //         // good[a[prevIdx]].second = true;
+            //         // good[a[prevIdx+1]].first = true;
+            //         problems -= 2;
+            //     } 
+            // }
+
+            // // check if the member that got added creates any problems
+            // int currOcc = getFirstOcc(a[currIdx]);
+            // if (currIdx > 0) {
+            //     int firstOccLeft = getFirstOcc(a[currIdx-1]);
+            //     if (good[a[currIdx]].first && currOcc < firstOccLeft) {
+            //         // good[a[currIdx]].first = false;
+            //         // good[a[currIdx-1]].second = false;
+            //         problems += 2;
+            //     } else if (!good[a[currIdx]].first && currOcc > firstOccLeft) {
+            //         // good[a[currIdx]].first = true;
+            //         // good[a[currIdx-1]].second = true;
+            //         problems -= 2;
+            //     }
+            // } if (currIdx < N-1) {
+            //     int firstOccRight = getFirstOcc(a[currIdx+1]);
+            //     if (good[a[currIdx]].second && currOcc > firstOccRight) {
+            //         // good[a[currIdx]].second = false;
+            //         // good[a[currIdx+1]].first = false;
+            //         problems += 2;
+            //     } else if (!good[a[currIdx]].second && currOcc < firstOccRight) {
+            //         // good[a[currIdx]].second = true;
+            //         // good[a[currIdx+1]].first = true;
+            //         problems -= 2;
+            //     } 
+            // }
             
             if (problems > 0) cout << "TIDAK\n";
             else cout << "YA\n";
