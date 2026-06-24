@@ -1,4 +1,5 @@
 // MARBLES - Marbles
+// USACO Guide Stars and Bars
 
 #include <bits/stdc++.h>
 using namespace std;
