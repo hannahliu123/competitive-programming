@@ -23,6 +23,10 @@
 // element. Essentially, final indexes decrease by N-row_cnt[a[i]] then initial indexes 
 // decrease by i
 
+// final takeaway is that when i recognize a problem with really annoying implmentations
+// i should slow down and REALLLY make sure my solution works :(((( and also stay more
+// organized so i understand what each section of my code is really doing. 
+
 #include <bits/stdc++.h>
 using namespace std;
 
