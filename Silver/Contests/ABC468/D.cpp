@@ -1,5 +1,10 @@
 // D
 
+// for this problem u just needed to know what order to process substrings in. the optimal
+// order is to process them by middle then continuing to expand the substring to the left
+// and right. this way, you only need O(1) time to check if the new substring is good.
+// beacuse the bounds are small, we can directly simulate every possible substring
+
 #include <bits/stdc++.h>
 using namespace std;
 

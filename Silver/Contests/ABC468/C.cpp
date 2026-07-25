@@ -1,5 +1,9 @@
 // C
 
+// for this problem u can actually directly compare vectors lexicographically using the
+// > or < operators. so i didnt need to make it into a string. i also just needed to know
+// how to use next_permutation. then generating all permutations takes O(N!)
+
 #include <bits/stdc++.h>
 using namespace std;
 
