@@ -26,7 +26,7 @@
 
 // so my intuition of not constructing the array a was wrong. if i just noticed each a[i]
 // had to be a multiple of p[i] and s[i] and should be the lowest, i could've MAYBE gotten
-// a better idea but this was too convoluted and complicated imo. NOT 1400 bro 💔
+// a better idea but this was too convoluted and complicated imo. NOT 1400 bro 
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -38,9 +38,9 @@ int main() {
     int t; cin >> t;
     while (t--) {
         int N; cin >> N;
-        vector<int> p(N);
+        vector<long long> p(N);
         for (auto& i : p) cin >> i;
-        vector<int> s(N);
+        vector<long long> s(N);
         for (auto& i : s) cin >> i;
 
         bool pos = true;
@@ -54,7 +54,6 @@ int main() {
                 pos = false; break;
             }
         }
-
         if (N>1 && p[0]%s[1]==0 && s[0]!=s[1]) pos = false;
         if (N>1 && s[N-1]%p[N-2]==0 && p[N-1]!=p[N-2]) pos = false;
 
@@ -63,6 +62,26 @@ int main() {
             continue;
         }
 
-        ;
+        vector<long long> a(N);
+        for (int i=0; i < N; i++) {
+            a[i] = lcm(p[i],s[i]);
+        }
+        long long pref_gcd = a[0];
+        for (int i=0; i < N; i++) {
+            pref_gcd = gcd(pref_gcd, a[i]);
+            if (pref_gcd != p[i]) {
+                pos = false; break;
+            }
+        }
+        long long suff_gcd = a[N-1];
+        for (int i=N-1; i >=0; i--) {
+            suff_gcd = gcd(suff_gcd, a[i]);
+            if (suff_gcd != s[i]) {
+                pos = false; break;
+            }
+        }
+
+        if (!pos) cout << "NO\n";
+        else cout << "YES\n";
     }
 }
