@@ -1,5 +1,15 @@
 // D
 
+// evaluating two pairs was really pointless. idk why i didn't just decide to evaluate
+// the first pair because obviously one of them would have to be in a pair.
+
+// this was another case of me not being sure my solution works before jumping into
+// implementation. One edge case i missed is that even if some player doesn't appear in
+// the finals, if player x appears every time, you could pair x with some nonexistent
+// player and that would be valid. Another edge case is when two players are in every
+// single final. Then, x can pair with N-1 other players and y can pair with N-2 (cos
+// we don't double count x and y)
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -9,64 +19,39 @@ int main() {
 
     int N, M; cin >> N >> M;
     vector<pair<int,int>> v(M);
-    unordered_set<int> players{};
     for (int i=0; i < M; i++) {
         cin >> v[i].first >> v[i].second;
-        players.insert(v[i].first);
-        players.insert(v[i].second);
     }
 
     set<pair<int,int>> ans{};
-
-    vector<int> four{v[0].first,v[1].first,v[0].second,v[1].second};
-    for (auto& a : four) {  // try a alone
+    int final_ans = 0;
+    vector<int> try_num{v[0].first,v[0].second};
+    for (auto& a : try_num) {  // try a
         int a_cnt=0;
-        vector<pair<int,int>> same{};
+        int op1=-1, op2=-1;
         for (int i=0; i < M; i++) {
             if (v[i].first==a || v[i].second==a) {
                 a_cnt++;
             } else {
-                if (same.empty()) {
-                    same = {{v[i].first,1},{v[i].second,1}};
+                if (op1==-1) {
+                    op1 = v[i].first;
+                    op2 = v[i].second;
                 } else {
-                    for (int j=0; j < 2; j++) {
-                        if (v[i].first==same[j].first || v[i].second==same[j].first) {
-                            same[j].second++;
-                        }
+                    if (v[i].first!=op1 && v[i].second!=op1) {
+                        op1 = -2;
+                    } if (v[i].first!=op2 && v[i].second!=op2) {
+                        op2 = -2;
                     }
                 }
             }
-        } if (a_cnt < M) {
-            int need = M-a_cnt;
-            for (int i=0; i < 2; i++) {
-                if (same[i].second == need) {
-                    ans.insert({min(a,same[i].first), max(a,same[i].first)});
-                }
-            }
-        } else if (a_cnt == M) {
-            for (auto& player : players) {
-                if (a!=player) ans.insert({min(a,player), max(a,player)});
-            }
         }
-    }
-    vector<pair<int,int>> pos{{v[0].first,v[1].first},{v[0].first,v[1].second},{v[1].first,v[0].second},{v[1].second,v[0].second}};
-    for (auto& p : pos) {   // try two together (a pair)
-        int a=p.first, b=p.second;
-        if (a==b || ans.count({min(a,b), max(a,b)})) continue;
-        int a_cnt=0, b_cnt=0;
-        bool possible = true;
-        for (int i=0; i < M; i++) {
-            if (v[i].first==a || v[i].second==a) {
-                a_cnt++;
-            } else if (v[i].first==b || v[i].second==b) {
-                b_cnt++;
-            } else {
-                possible = false; break;
-            }
-        } if (possible) {
-            ans.insert({min(a,b), max(a,b)});
-        }
+        if (op1 > 0) ans.insert({min(a,op1), max(a,op1)});
+        if (op2 > 0) ans.insert({min(a,op2), max(a,op2)});
+        if (a_cnt == M) final_ans++;
     }
 
-    cout << ans.size() << '\n';
+    if (final_ans == 0) final_ans = ans.size();
+    else if (final_ans == 1) final_ans = N-1;
+    else final_ans = 2*N-3;
+    cout << final_ans << '\n';
 }
