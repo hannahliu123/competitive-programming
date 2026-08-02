@@ -2,7 +2,6 @@
 
 // evaluating two pairs was really pointless. idk why i didn't just decide to evaluate
 // the first pair because obviously one of them would have to be in a pair.
-
 // this was another case of me not being sure my solution works before jumping into
 // implementation. One edge case i missed is that even if some player doesn't appear in
 // the finals, if player x appears every time, you could pair x with some nonexistent
