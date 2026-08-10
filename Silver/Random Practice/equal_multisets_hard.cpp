@@ -16,9 +16,14 @@
 // same but the implementation splits each chain into two cases: either everything is the
 // same so b[i] can be anything as long as the whole chain is the same, or not everything is
 // the same so b[i] must be the first occurance of a[j] such that a[j+K] is different from
-// a[j] or a[i] (they're the same).
+// a[j] or a[i] (they're the same). the editorial just tested these two conditions seperately
+// whereas i did it all in one loop basically. um i think planning this out before jumping 
+// into the code was really important because at first i didn't even realize the chain thing
+// and i was trying to implement some really messy idea. idk imo my train of thought was just
+// really messy until i got to the chain realization.
 
-
+// ok key realization is just keep narrowing down the problem to greedy observations if no
+// algorithms fit until its as simplified as possible and the implementation isn't a nightmare
 
 #include <bits/stdc++.h>
 using namespace std;
