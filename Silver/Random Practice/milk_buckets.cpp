@@ -18,6 +18,12 @@
 // try multiplying them all together. If during that process though the value exceeds 10^18,
 // the answer is invalid and we output 0.
 
+// final takeaway is there are ways to combat overflow error ig. like especially when the
+// overflow is THAT large. also yk how for time complexity you have to consider the worst
+// case senario? well for this problem you in a way had to consider the best case senario
+// (like smallest possible values of scale factor changes in capacities) to get to that
+// final realization
+
 #include <bits/stdc++.h>
 using namespace std;
 
