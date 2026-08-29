@@ -1,3 +1,8 @@
+// ahh i should've noticed that if we're deailing with just two characters (in this case
+// A and B), it makes like a million times easier to treat them as numbers (-1 and +1)
+
+// uhh lets actually come backkk to this cos it needs a segtree
+
 #include <bits/stdc++.h>
 using namespace std;
 

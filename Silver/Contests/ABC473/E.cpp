@@ -1,3 +1,10 @@
+// This was easier than D imo and i sovled it first. it was essentially just a greedy
+// and prefix sums and two pointers mix kind of thing but the intuition was pretty 
+// straightforward. you can quickly realize you can just greedily take all the multiples
+// of 8 as you encounter them, and that can be done using prefix sums and tracking what
+// remainders youve already encountered. the time contraints are loose too so u can just
+// use a map (actually a set would've worked too but wtv)
+
 #include <bits/stdc++.h>
 using namespace std;
 
