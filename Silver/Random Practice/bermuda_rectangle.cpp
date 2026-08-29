@@ -26,9 +26,10 @@ int main() {
                 if (x<p.first && y<p.first) break;
                 pair<int,int> f1 = {min(x,p.first), min(y,p.second)};
                 pair<int,int> f2 = {min(x,p.second), min(y,p.first)};
-                f1 = {f1.first-prev, f1.second-prev};
-                f2 = {f2.first-prev, f2.second-prev};
-                ans += (f1.second*f1.first) + (f2.first*f2.second) - (f1.first*f2.second);
+                f1 = {max(0,f1.first-prev), max(0,f1.second-prev)};
+                f2 = {max(0,f2.first-prev), max(0,f2.second-prev)};
+                int contr = (f1.first*f1.second) + (f2.first*f2.second) - (f1.first*f2.second);
+                ans += max(0,contr);
                 prev = p.first;
             }
 
