@@ -4,19 +4,11 @@ using namespace std;
 int main() {
     int t; cin >> t;
     while (t--) {
-        int N, M; cin >> N >> M;
-        vector<int> cnt(26,0);
-        for (int i=0 ; i < N; i++) {
-            string s; cin >> s;
-            cnt[s[0]-'a']++;
-        }
+        int N; cin >> N;
         bool pos = true;
-        for (int i=0 ; i < M; i++) {
-            string s; cin >> s;
-            for (auto& c : s) {
-                if (cnt[c-'A']==0) {
-                    pos = false; break;
-                }
+        for (int i=2; i*i <= (N+1); i++) {
+            if ((N+1)%i==0) {
+                pos = false; break;
             }
         }
 
