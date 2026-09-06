@@ -18,9 +18,11 @@ void update(int k, ll u) {     // set segtree[k] to u
 ll query(int l, int r) {   // [l, r)
     l += N; r += N;
     ll sum = 0;
-    while (l < r) {
+    // while (l < r) {
+    while (l <= r) {
         if (l%2==1) sum += segtree[l++];
-        if (r%2==1) sum += segtree[--r];
+        // if (r%2==1) sum += segtree[--r];
+        if (r%2==0) sum += segtree[r--];
         l /= 2; r /= 2;
     } return sum;
 }
@@ -41,7 +43,8 @@ int main() {
             update(k-1, u);
         } else {
             int l, r; cin >> l >> r;
-            cout << query(l-1,r) << '\n';
+            // cout << query(l-1,r) << '\n';
+            cout << query(l-1,r-1) << '\n';
         }
     }
 }
