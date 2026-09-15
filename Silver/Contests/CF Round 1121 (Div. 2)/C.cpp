@@ -12,7 +12,13 @@
 // we can do instead is keep track of prefex and suffix products. for (N-1)!/(N-i-1),
 // we just multiply the prefix from 1 to N-i-2 then the suffix from N-i to N-1
 
-//
+// okay so this problem i feel like i could've gotten (idk if i would've realized i
+// could switch out modular inverses for pref and suff products) but at least the idea
+// of splitting the project into seperate cases for each node of the tree. i mean i
+// feel like im pretty familiar with this kind of problem so maybe i was just too
+// tired or breaindead at the time. also i think i got stuck in loops of pointless
+// solutions and breaking down test cases. i need to realize counting problems are
+// usually just rearranging equation. dang it bro i should've been looking for invariantsss
 
 #include <bits/stdc++.h>
 using namespace std;
