@@ -1,3 +1,13 @@
+// yayaya i really proud of my thought process for this one. it was really important
+// that i notices how if the pirate decided to steal coins from pile i, then it's
+// optimal to steal all coins from that pile. Then i had a series of other realizations
+// that led me to the answer 
+
+// ughh im really sad i didn't solve d tho because now some ppl are saying c was harder
+// than d. i feel like i was just missing some little peice to D that i couldn't figure
+// out because i was able to break down and unpack the problem a lot but i just couldn't
+// find a solutionnnn
+
 #include <bits/stdc++.h>
 using namespace std;
 
