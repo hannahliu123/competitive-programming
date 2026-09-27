@@ -1,4 +1,4 @@
-// H. Ammar-utiful Array - R1x00
+// CF - H. Ammar-utiful Array
 
 // Start: 8:21
 // End: 9:08            47 mins
