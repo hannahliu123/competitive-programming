@@ -10,8 +10,6 @@
 // if there's a "+-" or "-+" or even an even # of +/- between two zeroes, output 2
 // otherwise, output 1
 
-// the editorial uses a dp solution though 
-
 #include <bits/stdc++.h>
 using namespace std;
 
