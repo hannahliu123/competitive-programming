@@ -1,3 +1,11 @@
+// OHHHH MYY GOSHHSHHSHHHSH IMMA CRASH TFHFJASHADHH ASOZUTUTUTUUTUTUTUT bruh are we
+// fr right now. i actually fried myself this contest so badly with WA solutions. like
+// are we fr. omg bro my poor rating oh welp
+
+// okay so stupid me tried to overoptimize again by breaking out of the loop if i
+// encountered 2 names 1 character away from s. But if there was a candidate that
+// perfectly matched later on, i wouldn't even get to them
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -23,7 +31,6 @@ int main() {
                 if (diff > 1) break;
             } if (diff==1) {
                 one_away++; idx = j;
-                if (one_away > 1) break;
             }
         }
         if (one_away==1) ans[idx]++;
