@@ -27,7 +27,23 @@
 // this problem reiterates how its important to start approaching problems by making as many
 // greedy observations as possible before trying to optimize anything. i went too deep into
 // a solution that was overcomplicated and didn't actually work. i should instead spend more
-// time trying to simplfy my logic and make broader connections to the problem
+// time trying to simplfy my logic and make broader connections to the problem. i actually
+// thought for a while there was no optimal way to greedily select where eactly to put cows,
+// but in reality there was one and i just totally missed it. before i thought i had to deal
+// with intervals overlapping eachothers' patches but i just missed the true ideal greedy
+// solution
+
+// oml this implementation took me over an hour im literally gonna crash out. there were just
+// too many different arrays and indexes to keep track of and so many little details that pmo'd.
+// something the editorial did was compute the total tastiness and one-cow subsequence tastiness
+// separately but that honestly doesn't simplfy much. in my code, i set the allowed position 
+// range [l1,r1] beforehand then increment pr until it goes outside. then i move on to the next
+// start pos by incrementing pl. one edge case i didn't account for though was if the starting
+// [l1,r1] subsequence didn't have a patch, but later on there was one within (l,r). to fix it,
+// i just needed to start l1 at the first valid patch
+
+// um i relaly hate 2 ptrs/sliding window now heh but in the future ig just like work it out
+// more thoroughly on paper before implementing.
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -35,45 +51,46 @@ using namespace std;
 int main() {
     int K, M, N; cin >> K >> M >> N;
     vector<pair<int,int>> patch(K); // pos, tastiness
-    vector<int> nhoj(M);    // pos
-    for (int i=0; i < K; i++) {
-        cin >> patch[i].first >> patch[i].second;
-    } for (int i=0; i < M; i++) {
-        cin >> nhoj[i];
-    } sort(patch.begin(), patch.end());
+    vector<int> nhoj(M+1, -1);    // pos
+    for (int i=0; i < K; i++) cin >> patch[i].first >> patch[i].second;
+    for (int i=0; i < M; i++) cin >> nhoj[i+1];
+    sort(patch.begin(), patch.end());
     sort(nhoj.begin(), nhoj.end());
+    nhoj.push_back(1000000002);
     
-    vector<long long> contr{0};
-    int idx1 = 0, idx2 = 0;
-    while (patch[idx2].first < nhoj[0]) {    // leftmost
-        contr[0] += patch[idx2++].second;
-    } for (int i=0; i < M-1; i++) {
+    vector<long long> contr{};
+    int pl = 0, pr = 0;
+    for (int i=0; i < M+1; i++) {
         int l = nhoj[i], r = nhoj[i+1];
-        int len = (r-l+1)/2 - 1;
-        int l1 = l+1, r1 = l1+len;     // inclusive
+        int len = (r-l+1)/2 - 1; 
 
-        long long total_contr = 0, mx_contr = 0;
-        long long curr_contr = 0;   // from l1 to r1
-        while (patch[idx1].first <= l) idx1++;
-        idx2 = idx1;
-        while (r1 <= r && patch[idx1].first <= r1) {
-            while (patch[idx2].first <= r1) {
-                curr_contr += patch[idx2].second;
-                total_contr += patch[idx2].second;
-                idx2++;
+        long long total = 0, mx = 0;
+        long long curr = 0;   // from position l1 to r1
+        while (pl<K && patch[pl].first < l) pl++;
+        if (pl >= K) break;
+        pr = pl;
+
+        int l1 = patch[pl].first, r1 = min(r-1, l1+len);      // inclusive
+        if (i==0 || i==M) r1=r-1;
+
+        while (l1 < r && pr<K && patch[pr].first < r) {
+            while (pr<K && patch[pr].first <= r1) {
+                curr += patch[pr].second;
+                total += patch[pr].second;
+                pr++;
             }
-            mx_contr = max(mx_contr, curr_contr);
-            curr_contr -= patch[idx1++].second;
-            l1 = patch[idx1].first; r1 = l1+len;
+            mx = max(mx, curr);
+            curr -= patch[pl++].second;
+            if (pl >= K) break;
+            l1 = patch[pl].first;
+            r1 = min(max(r1, l1+len), r-1);
         }
 
-        contr.push_back(mx_contr);              // first cow
-        contr.push_back(total_contr-mx_contr);  // second cow
-    }
-    while (idx2<K && patch[idx2].first <= nhoj[M-1]) idx2++;     // rightmost
-    if (idx2 < K) contr.push_back(0);
-    while (idx2 < K) {
-        contr[contr.size()-1] += patch[idx2++].second;
+        if (i==0 || i==M) contr.push_back(total);
+        else {
+            contr.push_back(mx);            // first cow
+            contr.push_back(total-mx);      // second cow
+        }
     } sort(contr.rbegin(), contr.rend());
 
     long long ans = 0;
