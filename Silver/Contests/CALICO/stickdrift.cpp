@@ -1,3 +1,6 @@
+// the reason we can greedily pick the fastest route at each turn is because we can
+// always choose to cancel out a drift by moving in the direction opposite of it
+
 #include <bits/stdc++.h>
 using namespace std;
 
